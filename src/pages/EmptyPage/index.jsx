@@ -4,22 +4,32 @@ class Father extends React.Component {
 state={
   fatherName:"fatherName",
   fatherage:"fatherage",
+  value:"这里是值"
 }
+  ChangeTest=(value)=>{
+  this.setState({
+    value
+  })
+  }
   render() {
     return (
       <div>
-        <p>这是父组件</p>
+        <p>{this.state.value}</p>
         <Button>点击调用子组件的方法</Button>
-        <Child fatherName={this.state.fatherName} fatherage={this.state.fatherage}/>
+        <Child fatherName={this.state.fatherName} fatherage={this.state.fatherage} 
+          ChangeTest={this.ChangeTest.bind(this)} onRef={this.onRef}/>
       </div>
     )
   }
 }
 
 class Child extends React.Component {
-
+state={
+  childName:"childName"
+}
   onClick=()=>{
     message.success(this.props.fatherName);
+    this.props.ChangeTest(this.state.childName);
   }
   render() {
     return (
